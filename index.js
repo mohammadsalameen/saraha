@@ -1,8 +1,8 @@
 import express from 'express'
-import { connectDB } from './DB/connection.js';
+import { initApp } from './index.router.js';
 const app = express();
 const PORT = 5000;
-connectDB();
+initApp(app, express);
 
 
 
