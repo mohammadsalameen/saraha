@@ -32,4 +32,6 @@ const UserModel = sequelize.define('User', {
         allowNull : false
     }
 });
+
+
 export default UserModel;

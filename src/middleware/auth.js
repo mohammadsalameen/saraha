@@ -1,11 +1,13 @@
 import jwt from 'jsonwebtoken';
+import { AppError } from '../utils/AppError.js';
 const auth = () =>{
     return (req, res, next) =>{
         const {token} = req.headers;
         const decoded = jwt.verify(token, 'mohammad');
         if(decoded.role != 'admin'){
-            return res.status(404).json("not authorized");
+            return next(new AppError("not authorized", 404));
         }
+        req.id = decoded.id;
         next();
     }
 }

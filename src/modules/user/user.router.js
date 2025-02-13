@@ -1,24 +1,13 @@
 import { Router } from "express";
 import UserModel from "../../../DB/model/user.model.js";
 import auth from "../../middleware/auth.js";
+import { deleteUser, getUser } from "./user.controller.js";
 
 const router = Router();
 
 //get users
-router.get('/',auth() ,async(req, res) =>{
-    const user = await UserModel.findAll({
-        attributes : ['name', 'userName']
-    });
-    return res.json({message : "success", user})
-});
+router.get('/', auth(), getUser);
 
-router.delete('/:id',auth(), async(req, res) =>{
-    const {id} = req.params;
-    const user = await UserModel.findByPk(id);
-    if(user == null){
-        return res.status(404).json({message : "user not found"});
-    }
-    await UserModel.destroy({where : {id : id}});
-    return res.status(200).json({message : "success"});
-})
+//delete user
+router.delete('/:id', auth(), deleteUser)
 export default router;
