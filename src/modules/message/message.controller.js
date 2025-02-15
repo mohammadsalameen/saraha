@@ -26,7 +26,7 @@ export const sendMessage = async(req, res, next) =>{
 }
 
 export const getMessageDetails = async(req, res) =>{
-    const messagesUser = await MessageModel.findAll({where : {UserId : req.id}});
+    const messagesUser = await MessageModel.findAll({where : {UserId : req.id}, attributes : ['content']});
     return res.status(200).json({message : "success",messagesUser});
 
 }
