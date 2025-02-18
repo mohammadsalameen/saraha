@@ -6,9 +6,6 @@ import { validation } from '../../middleware/validation.js';
 import { messageSchema } from './message.validation.js';
 const router = Router();
 
-//get messages
-// router.get('/',auth(),asyncHandler(getMessage));
-
 //create message
 router.post('/:id',auth(),validation(messageSchema) ,asyncHandler(sendMessage));
 
